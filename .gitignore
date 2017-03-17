@@ -1,0 +1,11 @@
+.cproject
+.force_relink
+.project
+.settings/
+Makefile
+Nios II/
+create-this-app
+module2.elf
+module2.map
+module2.objdump
+obj/
