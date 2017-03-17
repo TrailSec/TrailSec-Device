@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include "gps.h"
 #include "wifi.h"
+#include "../api/wifi_commands.h"
+#include "touchscreen.h"
 
 void init_gps(void) {
 	//set up 6850 control register to utilize a divide by 16 clock,
@@ -36,8 +38,8 @@ char getchar_gps(void) {
 			return GPS_RXDATA;
 		}
 	}
-	return "e";
 
+	return (char) 0;
 }
 
 // test function to send a command via serial port, and begin printing
@@ -45,14 +47,12 @@ char getchar_gps(void) {
 void send_command(char *command) {
 
 	int i;
-	char out_char;
 	int length = strlen(command);
 
 	//send the command to the gps
 	for (i = 0; i < length; i++) {
 		putchar_gps(command[i]);
 	}
-
 }
 
 //Check when GPGGA is displayed
@@ -85,7 +85,7 @@ int check_GPGGA(void) {
 
 //Converting NMEA to decimal degrees taken from:
 //https://blog.encodez.com/blog/convert-nmea-latitude-longitude-to-decimal
-double nmea2dec(char *nmea, char type, unsigned char *dir)
+double nmea2dec(char *nmea, char type, char *dir)
 {
     int idx, dot = 0;
     double dec = 0;
@@ -99,7 +99,7 @@ double nmea2dec(char *nmea, char type, unsigned char *dir)
     if (dot < 3)
         return 0;
 
-    int i,dd;
+    int dd;
     double mm;
     char cdd[5], cmm[10];
     memset(&cdd, 0, 5);
@@ -126,10 +126,8 @@ double nmea2dec(char *nmea, char type, unsigned char *dir)
 // latitude and longitude
 void read_gps_data(void) {
 	int i;
-	char out_char;
-	const char start_log[] = "$PMTK622,1*29\r\n";
+	char start_log[] = "$PMTK622,1*29\r\n";
 
-	int count = 0;
 	int check = 0;
 	int done = 0;
 	int next = 0;
@@ -143,15 +141,12 @@ void read_gps_data(void) {
 	double d_latitude;
 	double d_longitude;
 
-	//int progress = 0;
 	send_command(start_log);
 
 	while (done == 0) {
 
 		if (check != 1) {
 			while (check_GPGGA() != 1);
-				//drawLoadingBar(progress);
-				//progress++;
 			check = 1;
 			printf("\n");
 		}
@@ -172,7 +167,6 @@ void read_gps_data(void) {
 
 				printf("THE LATITUDE IN DEGREE: %lf\n", d_latitude);
 				printf("THE LONGITUDE IN DEGREE: %lf\n", d_longitude);
-
 
 				done++;
 
@@ -197,48 +191,7 @@ void read_gps_data(void) {
 
 	sprintf(slat,"%.5f", d_latitude);
 	sprintf(slong, "%.5f", d_longitude);
-	//TODO: Add to graphics
 
 	drawGPSData(slong, slat);
-
-
-	int k, j, total_len = 0;
-
-	char wifi_command_str[100] = "";
-	char str0[100] = "send_coor(\"";
-	char str2[100] = "\", \"";
-	char str3[100] = "\")";
-
-	for (j = 0; str0[j] != '\0'; j++) {
-		wifi_command_str[total_len] = str0[j];
-		total_len++;
-	}
-
-	for (j = 0; slat[j] != '\0'; j++) {
-		wifi_command_str[total_len] = slat[j];
-		total_len++;
-	}
-
-	for (j = 0; str2[j] != '\0'; j++) {
-		wifi_command_str[total_len] = str2[j];
-		total_len++;
-	}
-
-	for (j = 0; slong[j] != '\0'; j++) {
-		wifi_command_str[total_len] = slong[j];
-		total_len++;
-	}
-
-	for (j = 0; str3[j] != '\0'; ++j) {
-		wifi_command_str[total_len] = str3[j];
-		total_len++;
-	}
-	wifi_command_str[k] = '\0';
-
-	putString_wifi(wifi_command_str);
-	putString_wifi("\n");
-  // putString_wifi("send_coor(\"000000000000\", \"0000000000000\")");
-	// printf("send_coor(\"000000000000\", \"203.099\")");
-	// printf(wifi_command_str);
-	// printf("\n");
+	WIFI_sendCoordinates(slat, slong);
 }

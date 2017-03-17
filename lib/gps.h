@@ -20,5 +20,5 @@ int putchar_gps(char c);
 char getchar_gps(void);
 void send_command(char *command);
 int check_GPGGA(void);
-double nmea2dec(char *nmea, char type, unsigned char *dir);
+double nmea2dec(char *nmea, char type, char *dir);
 void read_gps_data(void);

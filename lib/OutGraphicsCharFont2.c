@@ -1,3 +1,6 @@
+#include "OutGraphicsCharFont.h"
+#include "touchscreen.h"
+
 // Constants ideally put this in a header file and #include it
 #define XRES 800
 #define YRES 480
@@ -25,7 +28,7 @@ void OutGraphicsCharFont2(int x, int y, int colour, int backgroundcolour, int c,
 	register char 	theColour = colour  ;
 	register int 	BitMask,
 					theCharacter = c,
-					j,
+					// j,
 					theRow, theColumn;
 
 

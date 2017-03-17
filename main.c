@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "lib/Colours.h"
+#include "lib/gps.h"
+#include "lib/OutGraphicsCharFont.h"
+#include "lib/touchscreen.h"
+#include "lib/wifi.h"
 
 int main() {
 
@@ -15,13 +19,10 @@ int main() {
 
 	drawIntroScreen();
 	ClearScreen(WHITE);
-	char userPrompt[] = "Please enter UserId!";
-	displayPopup(userPrompt, 20, LIME);
 
 	while(1){
 		ClearScreen(WHITE);
-		drawLoginScreen();
-		int userId = loginVerification();
+		int userId = 0;
 		drawMainScreen(userId);
 		mainScreenFunctionality();
 		printf("Done!!!\n");

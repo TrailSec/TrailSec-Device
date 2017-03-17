@@ -1,3 +1,6 @@
+#include "OutGraphicsCharFont.h"
+#include "touchscreen.h"
+
 /*************************************************************************************************
 ** This function draws a single ASCII character at the coord and colour specified
 ** it optionally ERASES the background colour pixels to the background colour

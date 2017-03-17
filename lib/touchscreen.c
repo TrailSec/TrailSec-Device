@@ -2,8 +2,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <unistd.h>
 #include "gps.h"
 #include "touchscreen.h"
+#include "OutGraphicsCharFont.h"
 
 void WriteAPixel(int x, int y, int Colour) {
 	WAIT_FOR_GRAPHICS; // is graphics ready for new command
@@ -186,7 +188,7 @@ void DLine(int x1, int y1, int x2, int y2, int Colour) {
 					x += s1;
 				else
 					y += s2;
-				error -= (dx << 1); // error = error – (dx * 2)
+				error -= (dx << 1); // error = error ï¿½ (dx * 2)
 			}
 			if (interchange == 1)
 				y += s2;
@@ -205,7 +207,7 @@ void DRectangle(int x1, int y1, int x2, int y2, int Colour) {
 }
 
 void DRectangleFill(int x1, int y1, int x2, int y2, int Colour) {
-	for (y1; y1 <= y2; y1++) {
+	for (; y1 <= y2; y1++) {
 		HLine(x1, y1, x2 - x1, Colour);
 	}
 }
@@ -360,6 +362,7 @@ void displayPopup(char* msg, int size, int backgroundColour) {
 
 	while (1) {
 		pT = TouchPressed();
+		(void) pT;
 		pR = TouchRelease();
 		if (pR.x >= XRES / 2 - 30 && pR.y >= YRES / 2 - 60
 				&& pR.x <= XRES / 2 + 30 && pR.y <= YRES / 2 - 15) {
@@ -381,6 +384,7 @@ int loginVerification(void) {
 	int checkId;
 	while (!loginfinished) {
 		pT = TouchPressed();
+		(void) pT;
 		pR = TouchRelease();
 		if (pR.x >= 280 && pR.x < 360 && pR.y >= 155 && pR.y < 235) {
 			userId[idLength] = '1';
@@ -559,6 +563,7 @@ void mainScreenFunctionality(){
 
 	while(1){
 		pT = TouchPressed();
+		(void) pT;
 		pR = TouchRelease();
 		if (pR.x >= XRES/2 - 50 + 150 && pR.x < XRES/2 + 50 + 150 && pR.y >= YRES/2 - 50 && pR.y < YRES/2 + 50){
 			printf("Sending GPS coordinates\n");
@@ -666,7 +671,9 @@ void drawIntroScreen(void){
 
 
 	pT = TouchPressed();
+	(void) pT;
 	pR = TouchRelease();
+	(void) pR;
 	return;
 }
 
