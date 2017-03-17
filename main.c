@@ -15,14 +15,13 @@ int main() {
 
 	drawIntroScreen();
 	ClearScreen(WHITE);
-	// char userPrompt[] = "Please enter UserId!";
-	// displayPopup(userPrompt, 20, LIME);
+	char userPrompt[] = "Please enter UserId!";
+	displayPopup(userPrompt, 20, LIME);
 
 	while(1){
 		ClearScreen(WHITE);
-		// drawLoginScreen();
-		// int userId = loginVerification();
-		int userId = 0;
+		drawLoginScreen();
+		int userId = loginVerification();
 		drawMainScreen(userId);
 		mainScreenFunctionality();
 		printf("Done!!!\n");
