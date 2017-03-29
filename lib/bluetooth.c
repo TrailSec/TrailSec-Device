@@ -42,7 +42,7 @@ char getchar_bluetooth(void)
 // Reads a string from serial port [BLUETOOTH]
 int getCommand_bluetooth(char *str_buffer, int buflen)
 {
-	int i=0;
+	  int i=0;
     for (i = 0; i < buflen; i++) {
         char charRx = getchar_bluetooth();
         str_buffer[i] = charRx;

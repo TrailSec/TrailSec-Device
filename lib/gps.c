@@ -4,8 +4,8 @@
 #include <stdbool.h>
 #include "gps.h"
 #include "wifi.h"
-#include "../api/wifi_commands.h"
 #include "touchscreen.h"
+#include "../views/views.h"
 
 void init_gps(void) {
 	//set up 6850 control register to utilize a divide by 16 clock,

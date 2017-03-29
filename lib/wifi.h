@@ -12,3 +12,5 @@ void wait_for_read_ready();
 void putchar_wifi(char c);
 void putString_wifi(char *s);
 char getchar_wifi(void);
+
+void WIFI_sendCoordinates(char *latitude, char *longitude);
