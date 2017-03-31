@@ -104,10 +104,8 @@ void displayPopup(char* msg, int size, int backgroundColour) {
 	for (hIndex = 0; hIndex < 150; hIndex++) {
 		HLine(XRES / 2 - 200, YRES / 2 - 150 + hIndex, 400, backgroundColour);
 	}
-	PrintStringFont2(msg, size, XRES / 2 - size * 5, YRES / 2 - 3 - 100, BLACK,
-			backgroundColour, 0);
-	DRectangleFill(XRES / 2 - 30, YRES / 2 - 60, XRES / 2 + 30, YRES / 2 - 15,
-			RED);
+	PrintStringFont2(msg, size, XRES / 2 - size * 5, YRES / 2 - 3 - 100, BLACK, backgroundColour, 0);
+	DRectangleFill(XRES / 2 - 30, YRES / 2 - 60, XRES / 2 + 30, YRES / 2 - 15, RED);
 	char okMsg[] = "ok";
 	PrintStringFont2(okMsg, 2, XRES / 2 - 12, YRES / 2 - 38 - 3, BLACK, RED, 0);
 

@@ -12,21 +12,20 @@ void init_wifi(void)
     putString_wifi("\n");
     usleep(1000);
     putString_wifi("\n");
-    putString_wifi("dofile(\"twilio.lua\")"); //even though the file is called twilio.lua,
-    											// this script connects to the firebase
+    putString_wifi("dofile(\"twilio.lua\")");
     putString_wifi("\n");
 }
 
 // Blocks the serial port until it is ready
 void wait_for_read_ready()
 {
-    while((WIFI_STATUS & 0x01) != 0x01);
+    while((WIFI_STATUS & WIFI_STATUS_RX_MASK) != WIFI_STATUS_RX_MASK);
 }
 
 // Write 1 byte of data into the WIFI serial port
 void putchar_wifi(char c)
 {
-    while ((WIFI_STATUS & 0x02) != 0x02);
+    while ((WIFI_STATUS & WIFI_STATUS_TX_MASK) != WIFI_STATUS_TX_MASK);
     WIFI_TXDATA = c & 0xFF;
 }
 
@@ -55,27 +54,32 @@ void WIFI_sendCoordinates(char *latitude, char *longitude) {
   	char str3[] = "\")";
 
     // send_coor(\"
-  	for (i = 0; str0[i] != '\0'; i++, total_len++)
-  		wifi_command_str[total_len] = str0[i];
+    for (i = 0; str0[i] != '\0'; i++, total_len++) {
+        wifi_command_str[total_len] = str0[i];
+    }
 
     // send_coor(\"XX.XXXX
-  	for (i = 0; latitude[i] != '\0'; i++, total_len++)
-  		wifi_command_str[total_len] = latitude[i];
+    for (i = 0; latitude[i] != '\0'; i++, total_len++) {
+        wifi_command_str[total_len] = latitude[i];
+    }
 
     // send_coor(\"XX.XXXX\", \"
-  	for (i = 0; str2[i] != '\0'; i++, total_len++)
-  		wifi_command_str[total_len] = str2[i];
+    for (i = 0; str2[i] != '\0'; i++, total_len++) {
+        wifi_command_str[total_len] = str2[i];
+    }
 
     // send_coor(\"XX.XXXX\", \"YY.YYYY
-  	for (i = 0; longitude[i] != '\0'; i++, total_len++)
-  		wifi_command_str[total_len] = longitude[i];
+    for (i = 0; longitude[i] != '\0'; i++, total_len++) {
+        wifi_command_str[total_len] = longitude[i];
+    }
 
     // send_coor(\"XX.XXXX\", \"YY.YYYY\")
-  	for (i = 0; str3[i] != '\0'; i++, total_len++)
-  		wifi_command_str[total_len] = str3[i];
+    for (i = 0; str3[i] != '\0'; i++, total_len++) {
+        wifi_command_str[total_len] = str3[i];
+    }
 
     // Append NULL-char to make it a string!
-  	wifi_command_str[total_len] = '\0';
+    wifi_command_str[total_len] = '\0';
 
     printf(">> %s\n", wifi_command_str);
 

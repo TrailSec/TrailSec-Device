@@ -3,7 +3,6 @@
 #define BLUETOOTH_TXDATA  (*(volatile unsigned char *)(0x84000222))
 #define BLUETOOTH_RXDATA  (*(volatile unsigned char *)(0x84000222))
 #define BLUETOOTH_BAUD    (*(volatile unsigned char *)(0x84000224))
-
 #define BLUETOOTH_STATUS_TX_MASK 0x02
 #define BLUETOOTH_STATUS_RX_MASK 0x01
 

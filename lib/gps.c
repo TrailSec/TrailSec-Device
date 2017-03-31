@@ -20,9 +20,7 @@ void init_gps(void) {
 int putchar_gps(char c) {
 	//poll Tx bit in 6850 status register. Wait for it to become '1'
 	//write 'c' to the 6850 TxData register to output the character
-
-	while ((GPS_STATUS & 0x02) != 0x02)
-		;
+	while ((GPS_STATUS & GPS_STATUS_TX_MASK) != GPS_STATUS_TX_MASK);
 	GPS_TXDATA = c;
 	return c;
 
@@ -68,16 +66,12 @@ int check_GPGGA(void) {
 		gps_output = getchar_gps();
 
 		if (gps_output == GPGGA[i]) {
-
 			check = 1;
 			printf("%c", gps_output);
-
 		} else {
-
 			check = 0;
 			break;
 		}
-
 	}
 
 	return check;
@@ -117,9 +111,9 @@ double nmea2dec(char *nmea, char type, char *dir)
         return 0;
 
     if (strcmp(dir, "N")== 0 || strcmp(dir, "E")== 0)
-      return dec;
+        return dec;
     else
-      return -1 * dec;
+        return -1 * dec;
 }
 
 //Read gps data from the gps module and print it to the console with the converted

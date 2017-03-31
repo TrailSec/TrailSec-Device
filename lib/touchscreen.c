@@ -9,12 +9,12 @@
 #include "OutGraphicsCharFont.h"
 
 void Init_Touch(void) {
-	Touch_Control = 0x15;
-	Touch_Baud = 0x05;
+	TOUCHSCREEN_CONTROL = 0x15;
+	TOUCHSCREEN_BAUD = 0x05;
 }
 
 void WaitingForTouch(void){
-	while (TouchScreen_RX != 0x80){}
+	while (TOUCHSCREEN_RXDATA != 0x80);
 }
 
 Point getTouchCoordinates(int PorR){
@@ -56,12 +56,12 @@ Point TouchRelease(void) {
 }
 
 int inputTouchScreenChar(int character) {
-	while ((Touch_Status & 0x02) != 0x02){}
-	TouchScreen_TX = character & 0xFF;
-	return TouchScreen_TX;
+	while ((TOUCHSCREEN_STATUS & TOUCHSCREEN_STATUS_TX_MASK) != TOUCHSCREEN_STATUS_TX_MASK);
+	TOUCHSCREEN_TXDATA = character & 0xFF;
+	return TOUCHSCREEN_TXDATA;
 }
 
 int outputTouchScreenChar(void) {
-	while ((Touch_Status & 0x01) != 0x01){}
-	return  TouchScreen_RX;
+	while ((TOUCHSCREEN_STATUS & TOUCHSCREEN_STATUS_RX_MASK) != TOUCHSCREEN_STATUS_RX_MASK);
+	return  TOUCHSCREEN_RXDATA;
 }

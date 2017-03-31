@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include "bluetooth.h"
 
-// Confire serial port (Baud = 115Kbps, 8 bits of data, no parity, 1 stop bit)
+// Configure serial port (Baud = 115Kbps, 8 bits of data, no parity, 1 stop bit)
 void init_bluetooth(void)
 {
     BLUETOOTH_CONTROL = 0x15;
@@ -13,7 +13,7 @@ void init_bluetooth(void)
 // Write 1-byte of data into serial port [BLUETOOTH]
 void putchar_bluetooth(char c)
 {
-    while ((BLUETOOTH_STATUS & 0x02) != 0x02);
+    while ((BLUETOOTH_STATUS & BLUETOOTH_STATUS_TX_MASK) != BLUETOOTH_STATUS_TX_MASK);
     BLUETOOTH_TXDATA = c & 0xFF;
 }
 
@@ -29,7 +29,7 @@ void putString_bluetooth(char *s)
 // Function blocks till serial port read status is ready
 void wait_for_read_ready_bluetooth()
 {
-    while((BLUETOOTH_STATUS & 0x01) != 0x01);
+    while((BLUETOOTH_STATUS & BLUETOOTH_STATUS_RX_MASK) != BLUETOOTH_STATUS_RX_MASK);
 }
 
 // Read 1-byte of data from serial port [BLUETOOTH]
@@ -42,7 +42,7 @@ char getchar_bluetooth(void)
 // Reads a string from serial port [BLUETOOTH]
 int getCommand_bluetooth(char *str_buffer, int buflen)
 {
-	  int i=0;
+    int i=0;
     for (i = 0; i < buflen; i++) {
         char charRx = getchar_bluetooth();
         str_buffer[i] = charRx;
