@@ -152,8 +152,8 @@ C_SRCS += lib/fonts.c
 C_SRCS += lib/gps.c
 C_SRCS += lib/wifi.c
 C_SRCS += lib/bluetooth.c
-C_SRCS += images/watchframe.c
 C_SRCS += views/views.c
+C_SRCS += images/watchframe.c
 CXX_SRCS :=
 ASM_SRCS :=
 

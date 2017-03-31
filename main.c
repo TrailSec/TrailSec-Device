@@ -31,23 +31,28 @@ int main() {
     // configure_bluetooth_dongle(); // Setup id & pin for bluetooth module
     printf("Done!\n");
 
-    drawIntroScreen();
-    ClearScreen(GREEN);
+    // drawIntroScreen();
+    // ClearScreen(GREEN);
 
-    int palette[] = {15920605,15779662,15580482,15456160,15051055,14399332,14199623,14013909,13092807,12171705,12094770,11640168,10987431,10066329,8882055,13732894,7829367,5592405,4275517,2235676,1381653,197379,16711422,15985357,15382074,15132390,14992500,14720549,14594106,14329394,14201931,14129190,13733408,12958370,12566720,12501183,10789011,8420989,8355968,8290431,6710886,6315614,15455126,4605510,4276287,4145215,3552822,2631720};
+    int palette[] = {15329769,12171705,10461600,9013641,3618615,2697513,2367264,1513239,197379,16711422,14672095,14079702,13027014,12566720,11053224,10461343,10132122,7631988,6710886,6315614,6250591,5789784,4473924,4275773,4210751,4145216,2235419};
 
     int k=0;
-    for (k=0; k<8; k++){
+    for (k=0; k<48; k++){
         ProgramPalette(k, palette[k]);
     }
 
+    ClearScreen(9);
+
     int *picture = getWatchframePixelArray();
     int i=0;
-    int row = 588;
-    int column = 981;
-    int x_offset = 200;
+    int row = 300;
+    int column = 500;
+    int x_offset = 100;
     int y_offset = 0;
     for (i=0; i<(row*column); i++) {
+        if (picture[i] == 16711422)
+            continue;
+        // find color
         int colorIndex = 0;
         for(colorIndex=0; colorIndex<48; colorIndex++) {
             if (palette[colorIndex] == picture[i])
@@ -57,7 +62,8 @@ int main() {
             printf("FAIL\n");
             break;
         }
-        WriteAPixel(x_offset+(i % row), y_offset+(i / 981), colorIndex);
+        else
+            WriteAPixel(x_offset+(i % row), y_offset+(i / row), colorIndex);
     }
 
 //-----------------------------------------------

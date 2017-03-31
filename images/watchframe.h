@@ -1,2 +1,1 @@
-extern int watchframePixelArray[];
-int *getWatchframePixelArray(void);
+const int *getWatchframePixelArray(void);
