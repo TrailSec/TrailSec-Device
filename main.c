@@ -33,38 +33,7 @@ int main() {
 
     // drawIntroScreen();
     // ClearScreen(GREEN);
-
-    int palette[] = {15329769,12171705,10461600,9013641,3618615,2697513,2367264,1513239,197379,16711422,14672095,14079702,13027014,12566720,11053224,10461343,10132122,7631988,6710886,6315614,6250591,5789784,4473924,4275773,4210751,4145216,2235419};
-
-    int k=0;
-    for (k=0; k<48; k++){
-        ProgramPalette(k, palette[k]);
-    }
-
-    ClearScreen(9);
-
-    int *picture = getWatchframePixelArray();
-    int i=0;
-    int row = 300;
-    int column = 500;
-    int x_offset = 100;
-    int y_offset = 0;
-    for (i=0; i<(row*column); i++) {
-        if (picture[i] == 16711422)
-            continue;
-        // find color
-        int colorIndex = 0;
-        for(colorIndex=0; colorIndex<48; colorIndex++) {
-            if (palette[colorIndex] == picture[i])
-                break;
-        }
-        if(colorIndex>=48){
-            printf("FAIL\n");
-            break;
-        }
-        else
-            WriteAPixel(x_offset+(i % row), y_offset+(i / row), colorIndex);
-    }
+    drawWatchframe(250, 0);
 
 //-----------------------------------------------
     // int i;

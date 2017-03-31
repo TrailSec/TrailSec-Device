@@ -1,1 +1,1 @@
-const int *getWatchframePixelArray(void);
+void drawWatchframe(int x_position, int y_position);
