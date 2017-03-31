@@ -2,7 +2,7 @@
 .force_relink
 .project
 .settings/
-Makefile
+# Makefile
 Nios II/
 create-this-app
 module2.elf
