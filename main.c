@@ -26,41 +26,25 @@ int main() {
 
     printf("Initializing Bluetooth Module... ");
     init_bluetooth();
-    // configure_bluetooth_dongle(); // Setup id & pin for bluetooth module
+    /* Setup id & pin for bluetooth module */
+    // configure_bluetooth_dongle();
     printf("Done!\n");
 
-    // drawIntroScreen();
-    // ClearScreen(GREEN);
+    /* Draw watchframe on LCD display */
     drawWatchframe(250, 0);
 
-//-----------------------------------------------
-    // int i;
-    // for (i=0; i<100; i++) {
-    //  WriteAPixel(100, i, WHITE);
-    //  WriteAPixel(101, i, WHITE);
-    //  WriteAPixel(102, i, WHITE);
-    //  WriteAPixel(103, i, WHITE);
-    //  WriteAPixel(104, i, WHITE);
-    // }/
-//-----------------------------------------------
     char str_buffer[BLUETOOTH_STRING_BUFFER_SIZE];
     while(1){
-        // ClearScreen(WHITE);
-        // int userId = 0;
-        // drawMainScreen(userId);
-        // mainScreenFunctionality();
 
+        /* Listen for commands from the bluetooth module */
         if ((BLUETOOTH_STATUS & BLUETOOTH_STATUS_RX_MASK) == BLUETOOTH_STATUS_RX_MASK) {
-            // char temp = getchar_bluetooth();
-            // printf("%c", temp);
-            // printf("^\n");
             if (getCommand_bluetooth(str_buffer, BLUETOOTH_STRING_BUFFER_SIZE) != -1) {
-                printf(">>>%s", str_buffer);
-                printf("<<< DONE\n");
+                printf(">>%s", str_buffer);
+                printf("<<\n");
             }
-            // printf("v\n");
         }
 
+        /* Listen for inputs from the touchscreen controller module */
         if ((TOUCHSCREEN_STATUS & TOUCHSCREEN_STATUS_RX_MASK) == TOUCHSCREEN_STATUS_RX_MASK) {
             Point temp;
             temp = TouchPressed();
@@ -68,9 +52,6 @@ int main() {
             printf("%d, %d\n", temp.x, temp.y);
         }
     }
-//-----------------------------------------------
-
-    printf("Done!!!\n");
 
     return 0;
 }
