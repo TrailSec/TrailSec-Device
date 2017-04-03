@@ -2,9 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "modules/graphics/Colours.h"
 #include "modules/graphics/graphics.h"
-#include "modules/graphics/OutGraphicsCharFont.h"
 #include "modules/touchscreen/touchscreen.h"
 #include "modules/wifi/wifi.h"
 #include "modules/gps/gps.h"

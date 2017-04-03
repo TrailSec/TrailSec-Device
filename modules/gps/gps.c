@@ -185,7 +185,5 @@ void read_gps_data(void) {
 
 	sprintf(slat,"%.5f", d_latitude);
 	sprintf(slong, "%.5f", d_longitude);
-
-	drawGPSData(slong, slat);
 	WIFI_sendCoordinates(slat, slong);
 }

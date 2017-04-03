@@ -4,7 +4,6 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include "graphics.h"
-#include "OutGraphicsCharFont.h"
 #include "../gps/gps.h"
 #include "../touchscreen/touchscreen.h"
 
