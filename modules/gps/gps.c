@@ -2,10 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../gps/gps.h"
-#include "../wifi/wifi.h"
-#include "../touchscreen/touchscreen.h"
-#include "../../views/views.h"
+#include "gps.h"
 
 void init_gps(void) {
     //set up 6850 control register to utilize a divide by 16 clock,
@@ -115,9 +112,8 @@ double nmea2dec(char *nmea, char type, char *dir)
         return -1 * dec;
 }
 
-//Read gps data from the gps module and print it to the console with the converted
-// latitude and longitude
-void read_gps_data(void) {
+// Read gps data from the gps module and print it to the console with the converted latitude and longitude
+void get_gps_data(double *d_latitude, double *d_longitude) {
     int i;
     char start_log[] = "$PMTK622,1*29\r\n";
 
@@ -129,11 +125,6 @@ void read_gps_data(void) {
     char longitude[15] = {'\0'};
     char east_west[3] = {'\0'};
     char north_south[3] = {'\0'};
-    char slat[50];
-    char slong[50];
-    double d_latitude;
-    double d_longitude;
-
     send_command(start_log);
 
     while (done == 0) {
@@ -152,11 +143,11 @@ void read_gps_data(void) {
                 printf("Longitude (dddmm.mmmm): %s\n", longitude);
                 printf("E/W Indicator: %s\n", east_west);
 
-                d_latitude = nmea2dec(latitude, '1', north_south);
-                d_longitude = nmea2dec(longitude, '0', east_west);
+                *d_latitude = nmea2dec(latitude, '1', north_south);
+                *d_longitude = nmea2dec(longitude, '0', east_west);
 
-                printf("THE LATITUDE IN DEGREE: %lf\n", d_latitude);
-                printf("THE LONGITUDE IN DEGREE: %lf\n", d_longitude);
+                printf("THE LATITUDE IN DEGREE: %lf\n", *d_latitude);
+                printf("THE LONGITUDE IN DEGREE: %lf\n", *d_longitude);
 
                 done++;
             }
@@ -178,8 +169,4 @@ void read_gps_data(void) {
             }
         }
     }
-
-    sprintf(slat,"%.5f", d_latitude);
-    sprintf(slong, "%.5f", d_longitude);
-    WIFI_sendCoordinates(slat, slong);
 }
