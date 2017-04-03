@@ -2,10 +2,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "gps.h"
-#include "wifi.h"
-#include "touchscreen.h"
-#include "../views/views.h"
+#include "../gps/gps.h"
+#include "../wifi/wifi.h"
+#include "../touchscreen/touchscreen.h"
+#include "../../views/views.h"
 
 void init_gps(void) {
 	//set up 6850 control register to utilize a divide by 16 clock,

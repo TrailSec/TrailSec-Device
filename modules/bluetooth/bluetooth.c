@@ -47,7 +47,7 @@ int getCommand_bluetooth(char *str_buffer, int buflen)
         char charRx = getchar_bluetooth();
         str_buffer[i] = charRx;
 
-        if (charRx == '\0') {
+        if (charRx == '\n') {
             return i;
         }
     }

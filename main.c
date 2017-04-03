@@ -2,15 +2,15 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "lib/Colours.h"
-#include "lib/touchscreen.h"
-#include "lib/graphics.h"
-#include "lib/OutGraphicsCharFont.h"
-#include "lib/wifi.h"
-#include "lib/gps.h"
-#include "lib/bluetooth.h"
+#include "modules/graphics/Colours.h"
+#include "modules/graphics/graphics.h"
+#include "modules/graphics/OutGraphicsCharFont.h"
+#include "modules/touchscreen/touchscreen.h"
+#include "modules/wifi/wifi.h"
+#include "modules/gps/gps.h"
+#include "modules/bluetooth/bluetooth.h"
+#include "modules/images/watchframe.h"
 #include "views/views.h"
-#include "images/watchframe.h"
 
 int main() {
 
@@ -45,21 +45,31 @@ int main() {
     //  WriteAPixel(104, i, WHITE);
     // }/
 //-----------------------------------------------
-    // // char str_buffer[10];
-    // while(1){
-    //  // ClearScreen(WHITE);
-    //  // int userId = 0;
-    //  // drawMainScreen(userId);
-    //  // mainScreenFunctionality();
-    //  //
-    //  // if ((BLUETOOTH_STATUS & 0x01) == 0x01) {
-    //  //  if (getCommand_bluetooth(str_buffer, 9) != -1) {
-    //  //      printf(">>> %s", str_buffer);
-    //  //  }
-    //  // }
-    //  char temp = getchar_bluetooth();
-    //   printf("%c", temp);
-    // }
+    char str_buffer[BLUETOOTH_STRING_BUFFER_SIZE];
+    while(1){
+        // ClearScreen(WHITE);
+        // int userId = 0;
+        // drawMainScreen(userId);
+        // mainScreenFunctionality();
+
+        if ((BLUETOOTH_STATUS & BLUETOOTH_STATUS_RX_MASK) == BLUETOOTH_STATUS_RX_MASK) {
+            // char temp = getchar_bluetooth();
+            // printf("%c", temp);
+            // printf("^\n");
+            if (getCommand_bluetooth(str_buffer, BLUETOOTH_STRING_BUFFER_SIZE) != -1) {
+                printf(">>>%s", str_buffer);
+                printf("<<< DONE\n");
+            }
+            // printf("v\n");
+        }
+
+        if ((TOUCHSCREEN_STATUS & TOUCHSCREEN_STATUS_RX_MASK) == TOUCHSCREEN_STATUS_RX_MASK) {
+            Point temp;
+            temp = TouchPressed();
+            temp = TouchRelease();
+            printf("%d, %d\n", temp.x, temp.y);
+        }
+    }
 //-----------------------------------------------
 
     printf("Done!!!\n");

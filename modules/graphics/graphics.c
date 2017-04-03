@@ -3,9 +3,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <unistd.h>
-#include "gps.h"
-#include "touchscreen.h"
+#include "graphics.h"
 #include "OutGraphicsCharFont.h"
+#include "../gps/gps.h"
+#include "../touchscreen/touchscreen.h"
 
 void WriteAPixel(int x, int y, int Colour) {
 	WAIT_FOR_GRAPHICS; // is graphics ready for new command

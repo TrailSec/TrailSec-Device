@@ -4,9 +4,10 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include "views.h"
-#include "../lib/gps.h"
-#include "../lib/touchscreen.h"
-#include "../lib/OutGraphicsCharFont.h"
+#include "../modules/gps/gps.h"
+#include "../modules/touchscreen/touchscreen.h"
+#include "../modules/graphics/OutGraphicsCharFont.h"
+#include "../modules/graphics/graphics.h"
 
 int checkLoginId(char* userId) {
 

@@ -3,10 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <unistd.h>
-#include "gps.h"
 #include "touchscreen.h"
-#include "graphics.h"
-#include "OutGraphicsCharFont.h"
 
 void Init_Touch(void) {
 	TOUCHSCREEN_CONTROL = 0x15;

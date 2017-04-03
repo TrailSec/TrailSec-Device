@@ -143,17 +143,17 @@ ELF := module2.elf
 
 # Paths to C, C++, and assembly source files.
 C_SRCS += main.c
-C_SRCS += lib/touchscreen.c
-C_SRCS += lib/graphics.c
-C_SRCS += lib/ColourPallette.c
-C_SRCS += lib/OutGraphicsCharFont1.c
-C_SRCS += lib/OutGraphicsCharFont2.c
-C_SRCS += lib/fonts.c
-C_SRCS += lib/gps.c
-C_SRCS += lib/wifi.c
-C_SRCS += lib/bluetooth.c
+C_SRCS += modules/bluetooth/bluetooth.c
+C_SRCS += modules/gps/gps.c
+C_SRCS += modules/graphics/graphics.c
+C_SRCS += modules/graphics/ColourPallette.c
+C_SRCS += modules/graphics/OutGraphicsCharFont1.c
+C_SRCS += modules/graphics/OutGraphicsCharFont2.c
+C_SRCS += modules/graphics/fonts.c
+C_SRCS += modules/images/watchframe.c
+C_SRCS += modules/touchscreen/touchscreen.c
+C_SRCS += modules/wifi/wifi.c
 C_SRCS += views/views.c
-C_SRCS += images/watchframe.c
 CXX_SRCS :=
 ASM_SRCS :=
 

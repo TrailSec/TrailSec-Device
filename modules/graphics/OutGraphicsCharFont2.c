@@ -1,5 +1,6 @@
+#include "graphics.h"
 #include "OutGraphicsCharFont.h"
-#include "touchscreen.h"
+#include "../touchscreen/touchscreen.h"
 
 // Constants ideally put this in a header file and #include it
 #define XRES 800
