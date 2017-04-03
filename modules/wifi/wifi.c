@@ -48,10 +48,10 @@ void WIFI_sendCoordinates(char *latitude, char *longitude) {
 
     int i, total_len = 0;
 
-  	char wifi_command_str[100] = "";
-  	char str0[] = "send_coor(\"";
-  	char str2[] = "\", \"";
-  	char str3[] = "\")";
+    char wifi_command_str[100] = "";
+    char str0[] = "send_coor(\"";
+    char str2[] = "\", \"";
+    char str3[] = "\")";
 
     // send_coor(\"
     for (i = 0; str0[i] != '\0'; i++, total_len++) {
@@ -83,6 +83,6 @@ void WIFI_sendCoordinates(char *latitude, char *longitude) {
 
     printf(">> %s\n", wifi_command_str);
 
-  	putString_wifi(wifi_command_str);
-  	putString_wifi("\n");
+    putString_wifi(wifi_command_str);
+    putString_wifi("\n");
 }

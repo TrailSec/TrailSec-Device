@@ -1,6 +1,6 @@
 typedef struct {
-	int x;
-	int y;
+    int x;
+    int y;
 } Point;
 
 #define TOUCHSCREEN_CONTROL (*(volatile unsigned char *)(0x84000230))
