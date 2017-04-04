@@ -20,11 +20,11 @@ drawView_main() {
      * - This allows us to call "WriteAPixel()" lesser amount of time.
      * - "WriteAPixel()" is a really slow function.
      */
-    Rectangle(VIEW_POSITION_X, 
-                VIEW_POSITION_Y, 
-                VIEW_POSITION_X + VIEW_WIDTH, 
-                VIEW_POSITION_Y + VIEW_HEIGHT, 
-                VIEW_MAIN_DOMINANT_COLOR);
+    DRectangleFill(VIEW_POSITION_X, 
+                    VIEW_POSITION_Y, 
+                    VIEW_POSITION_X + VIEW_WIDTH, 
+                    VIEW_POSITION_Y + VIEW_HEIGHT, 
+                    VIEW_MAIN_DOMINANT_COLOR);
 
     int j = 0;
     for (j = 0; j < (VIEW_WIDTH * VIEW_HEIGHT); j++) {
