@@ -12,9 +12,6 @@
 
 int main() {
 
-    ProgramPalette(63, 16777215);
-    ClearScreen(63);
-
     printf("Initializing GPS Module... ");
     Init_Touch();
     printf("Done!\n");
@@ -33,7 +30,9 @@ int main() {
     // configure_bluetooth_dongle();
     printf("Done!\n");
 
-    /* Draw watchframe on LCD display */
+    /* Clear LCD display (WHITE) & draw watchframe */
+    ProgramPalette(63, 0xFFFFFF);
+    ClearScreen(63);
     drawWatchframe();
 
     /* Start loading UI views within the watchframe */
