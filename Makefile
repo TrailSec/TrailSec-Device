@@ -152,7 +152,10 @@ C_SRCS += modules/images/view_main.c
 C_SRCS += modules/images/view_splashscreen.c
 C_SRCS += modules/touchscreen/touchscreen.c
 C_SRCS += modules/wifi/wifi.c
-C_SRCS += views/views.c
+C_SRCS += views/router.c
+C_SRCS += views/_splashscreen.c
+C_SRCS += views/_bluetoothpairing.c
+C_SRCS += views/_main.c
 CXX_SRCS :=
 ASM_SRCS :=
 

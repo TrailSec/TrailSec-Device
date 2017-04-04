@@ -33,24 +33,10 @@ int main() {
     /* Draw watchframe on LCD display */
     drawWatchframe();
 
-    char str_buffer[BLUETOOTH_STRING_BUFFER_SIZE];
+    /* */
+    int VIEW_STATE = 0;
     while(1){
-
-        /* Listen for commands from the bluetooth module */
-        if ((BLUETOOTH_STATUS & BLUETOOTH_STATUS_RX_MASK) == BLUETOOTH_STATUS_RX_MASK) {
-            if (getCommand_bluetooth(str_buffer, BLUETOOTH_STRING_BUFFER_SIZE) != -1) {
-                printf(">>%s", str_buffer);
-                printf("<<\n");
-            }
-        }
-
-        /* Listen for inputs from the touchscreen controller module */
-        if ((TOUCHSCREEN_STATUS & TOUCHSCREEN_STATUS_RX_MASK) == TOUCHSCREEN_STATUS_RX_MASK) {
-            Point temp;
-            temp = TouchPressed();
-            temp = TouchRelease();
-            printf("%d, %d\n", temp.x, temp.y);
-        }
+        VIEW_STATE = loadView(VIEW_STATE);
     }
 
     return 0;
