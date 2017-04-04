@@ -7,7 +7,7 @@
 #include "modules/wifi/wifi.h"
 #include "modules/gps/gps.h"
 #include "modules/bluetooth/bluetooth.h"
-#include "modules/images/watchframe.h"
+#include "modules/images/images.h"
 #include "views/views.h"
 
 int main() {
@@ -31,7 +31,7 @@ int main() {
     printf("Done!\n");
 
     /* Draw watchframe on LCD display */
-    drawWatchframe(250, 0);
+    drawWatchframe();
 
     char str_buffer[BLUETOOTH_STRING_BUFFER_SIZE];
     while(1){
