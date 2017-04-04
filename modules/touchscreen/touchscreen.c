@@ -62,3 +62,14 @@ int outputTouchScreenChar(void) {
     while ((TOUCHSCREEN_STATUS & TOUCHSCREEN_STATUS_RX_MASK) != TOUCHSCREEN_STATUS_RX_MASK);
     return  TOUCHSCREEN_RXDATA;
 }
+
+bool isTouchInputWithinBox(Point touchInput, Box touchArea) {
+    if ((touchInput.x >= touchArea.x && touchInput.x <= (touchArea.x + touchArea.width)) &&
+        (touchInput.y >= touchArea.y && touchInput.y <= (touchArea.y + touchArea.height))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+

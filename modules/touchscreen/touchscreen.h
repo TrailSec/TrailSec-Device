@@ -1,7 +1,16 @@
+#include <stdbool.h>
+
 typedef struct {
     int x;
     int y;
 } Point;
+
+typedef struct {
+    int x;
+    int y;
+    int height;
+    int width;
+} Box;
 
 #define TOUCHSCREEN_CONTROL (*(volatile unsigned char *)(0x84000230))
 #define TOUCHSCREEN_STATUS (*(volatile unsigned char *)(0x84000230))
@@ -18,3 +27,6 @@ Point TouchPressed(void);
 Point TouchRelease(void);
 int inputTouchScreenChar(int character);
 int outputTouchScreenChar(void);
+
+/* helper methods */
+bool isTouchInputWithinBox(Point touchInput, Box touchArea);
