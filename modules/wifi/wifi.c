@@ -12,7 +12,7 @@ void init_wifi(void)
     putString_wifi("\n");
     usleep(1000);
     putString_wifi("\n");
-    putString_wifi("dofile(\"twilio.lua\")");
+    putString_wifi("dofile(\"trailsec.lua\")");
     putString_wifi("\n");
 }
 
@@ -44,38 +44,49 @@ char getchar_wifi(void)
     return WIFI_RXDATA;
 }
 
-void WIFI_sendCoordinates(char *latitude, char *longitude) {
+void WIFI_sendCoordinates(char *latitude, char *longitude, char *user_id) {
 
     int i, total_len = 0;
 
-    char wifi_command_str[100] = "";
-    char str0[] = "send_coor(\"";
+    char wifi_command_str[150] = "";
+    char str0[] = "POST_TO_FIREBASE(\"";
     char str2[] = "\", \"";
-    char str3[] = "\")";
+    char str3[] = "\", \"";
+    char str4[] = "\")";
 
-    // send_coor(\"
+    // POST_TO_FIREBASE(\"
     for (i = 0; str0[i] != '\0'; i++, total_len++) {
         wifi_command_str[total_len] = str0[i];
     }
 
-    // send_coor(\"XX.XXXX
+    // POST_TO_FIREBASE(\"XX.XXXX
     for (i = 0; latitude[i] != '\0'; i++, total_len++) {
         wifi_command_str[total_len] = latitude[i];
     }
 
-    // send_coor(\"XX.XXXX\", \"
+    // POST_TO_FIREBASE(\"XX.XXXX\", \"
     for (i = 0; str2[i] != '\0'; i++, total_len++) {
         wifi_command_str[total_len] = str2[i];
     }
 
-    // send_coor(\"XX.XXXX\", \"YY.YYYY
+    // POST_TO_FIREBASE(\"XX.XXXX\", \"YY.YYYY
     for (i = 0; longitude[i] != '\0'; i++, total_len++) {
         wifi_command_str[total_len] = longitude[i];
     }
 
-    // send_coor(\"XX.XXXX\", \"YY.YYYY\")
-    for (i = 0; str3[i] != '\0'; i++, total_len++) {
+    // POST_TO_FIREBASE(\"XX.XXXX\", \"YY.YYYY\", \"
+    for (i = 0; str2[i] != '\0'; i++, total_len++) {
         wifi_command_str[total_len] = str3[i];
+    }
+
+    // POST_TO_FIREBASE(\"XX.XXXX\", \"YY.YYYY\", \"ZZZZZZZZZZZZ
+    for (i = 0; longitude[i] != '\0'; i++, total_len++) {
+        wifi_command_str[total_len] = longitude[i];
+    }
+
+    // POST_TO_FIREBASE(\"XX.XXXX\", \"YY.YYYY\", \"ZZZZZZZZZZZZ\")
+    for (i = 0; str3[i] != '\0'; i++, total_len++) {
+        wifi_command_str[total_len] = str4[i];
     }
 
     // Append NULL-char to make it a string!
