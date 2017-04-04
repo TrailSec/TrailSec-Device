@@ -12,6 +12,9 @@
 
 int main() {
 
+    ProgramPalette(63, 16777215);
+    ClearScreen(63);
+
     printf("Initializing GPS Module... ");
     Init_Touch();
     printf("Done!\n");
@@ -33,7 +36,7 @@ int main() {
     /* Draw watchframe on LCD display */
     drawWatchframe();
 
-    /* */
+    /* Start loading UI views within the watchframe */
     int VIEW_STATE = 0;
     while(1){
         VIEW_STATE = loadView(VIEW_STATE);

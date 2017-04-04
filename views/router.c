@@ -10,7 +10,7 @@ loadView(int view_state) {
             next_state = loadView_splashscreen();
             break;
         case VIEW_BLUETOOTHPAIRING_ID:
-            next_state = loadView_bluetoothpairing();
+            next_state = loadView_bluetoothPairing();
             break;
         case VIEW_MAIN_ID:
             next_state = loadView_main();
