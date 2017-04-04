@@ -1,5 +1,9 @@
+#include <stdio.h>
+#include <string.h>
 #include "views.h"
 #include "../modules/images/images.h"
+#include "../modules/gps/gps.h"
+#include "../modules/wifi/wifi.h"
 #include "../modules/touchscreen/touchscreen.h"
 
 #define CONTINUE_BUTTON_POSITION_X VIEW_POSITION_X
@@ -10,28 +14,23 @@
 int
 loadView_checkIn(){
 
-    Point touchInput;
-    int next_state;
-
-    /* Setup touch area for [CONTINUE_BUTTON] */
-    Box button_continue = createBox(CONTINUE_BUTTON_POSITION_X, CONTINUE_BUTTON_POSITION_Y, CONTINUE_BUTTON_HEIGHT, CONTINUE_BUTTON_WIDTH);
+    int next_state = VIEW_MAIN_ID;
 
     /* Draw UI on screen */
     drawView_checkIn();
 
-    /* Listen for inputs on the touchscreen */
-    while(1){
-        if ((TOUCHSCREEN_STATUS & TOUCHSCREEN_STATUS_RX_MASK) == TOUCHSCREEN_STATUS_RX_MASK) {
-            touchInput = TouchPressed();
-            touchInput = TouchRelease();
+    // /* Get current position from GPS Module */
+    // double latitude, longitude;
+    // GPS_getCoordinates(&latitude, &longitude);
 
-            /* Check if touch input fall within the [CONTINUE_BUTTON] */
-            if (isTouchInputWithinBox(touchInput, button_continue)) {
-                next_state = VIEW_MAIN_ID;
-                break;
-            }
-        }
-    }
+    // /* Make POST request to Firebase REST API via Wifi Module */
+    // char str_latitude[50], str_longitude[50];
+    // sprintf(str_latitude,"%.5f", latitude);
+    // sprintf(str_longitude, "%.5f", longitude);
+    // WIFI_sendCoordinates(str_latitude, str_longitude, "TEST");
+
+    /* TRY MAKING POST REQUEST w/ READ GPS MODULE */
+    WIFI_sendCoordinates("49.2765", "-123.2177", "HsrdlOXmUqhwrdduuDrLqacuvSI3");
 
     return next_state;
 };
