@@ -46,13 +46,14 @@ char getchar_wifi(void)
 
 void WIFI_sendCoordinates(char *latitude, char *longitude, char *user_id) {
 
+    printf(">> SENDING...\n");
+
     int i, total_len = 0;
 
     char wifi_command_str[150] = "";
     char str0[] = "POST_TO_FIREBASE(\"";
     char str2[] = "\", \"";
-    char str3[] = "\", \"";
-    char str4[] = "\")";
+    char str3[] = "\")";
 
     // POST_TO_FIREBASE(\"
     for (i = 0; str0[i] != '\0'; i++, total_len++) {
@@ -76,17 +77,17 @@ void WIFI_sendCoordinates(char *latitude, char *longitude, char *user_id) {
 
     // POST_TO_FIREBASE(\"XX.XXXX\", \"YY.YYYY\", \"
     for (i = 0; str2[i] != '\0'; i++, total_len++) {
-        wifi_command_str[total_len] = str3[i];
+        wifi_command_str[total_len] = str2[i];
     }
 
     // POST_TO_FIREBASE(\"XX.XXXX\", \"YY.YYYY\", \"ZZZZZZZZZZZZ
-    for (i = 0; longitude[i] != '\0'; i++, total_len++) {
-        wifi_command_str[total_len] = longitude[i];
+    for (i = 0; user_id[i] != '\0'; i++, total_len++) {
+        wifi_command_str[total_len] = user_id[i];
     }
 
     // POST_TO_FIREBASE(\"XX.XXXX\", \"YY.YYYY\", \"ZZZZZZZZZZZZ\")
     for (i = 0; str3[i] != '\0'; i++, total_len++) {
-        wifi_command_str[total_len] = str4[i];
+        wifi_command_str[total_len] = str3[i];
     }
 
     // Append NULL-char to make it a string!

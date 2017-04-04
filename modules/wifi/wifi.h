@@ -12,4 +12,4 @@ void putchar_wifi(char c);
 void putString_wifi(char *s);
 char getchar_wifi(void);
 
-void WIFI_sendCoordinates(char *latitude, char *longitude);
+void WIFI_sendCoordinates(char *latitude, char *longitude, char *user_id);
