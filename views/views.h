@@ -5,3 +5,4 @@ int loadView(int view_state);
 int loadView_splashscreen(void);
 int loadView_bluetoothPairing(void);
 int loadView_main(void);
+int loadView_checkIn(void);

@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "../modules/images/images.h"
 #include "views.h"
 
@@ -15,8 +16,11 @@ loadView(int view_state) {
         case VIEW_MAIN_ID:
             next_state = loadView_main();
             break;
+        case VIEW_CHECKIN_ID:
+            next_state = loadView_checkIn();
+            break;
         default:
-            next_state = -1;
+            printf("ERROR: INVALID STATE!\n");
             break;
     }
 

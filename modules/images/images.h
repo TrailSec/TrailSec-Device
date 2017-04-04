@@ -17,6 +17,7 @@
 #define VIEW_SPLASHSCREEN_ID 0
 #define VIEW_BLUETOOTHPAIRING_ID 1
 #define VIEW_MAIN_ID 2
+#define VIEW_CHECKIN_ID 3
 
 /* Handles view routing */
 int loadView(int view_state);
@@ -28,3 +29,4 @@ void drawWatchframe();
 void drawView_splashscreen();
 void drawView_bluetoothPairing();
 void drawView_main();
+void drawView_checkIn();

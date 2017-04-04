@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "views.h"
 #include "../modules/images/images.h"
 #include "../modules/touchscreen/touchscreen.h"
@@ -34,6 +35,8 @@ loadView_main(){
             /* Check if touch input fall within the [LOGOUT_BUTTON] */
             if (isTouchInputWithinBox(touchInput, button_checkin)) {
                 printf("CHECKING IN...\n");
+                next_state = VIEW_CHECKIN_ID;
+                break;
             }
 
             /* Check if touch input fall within the [LOGOUT_BUTTON] */
