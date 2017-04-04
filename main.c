@@ -10,6 +10,8 @@
 #include "modules/images/images.h"
 #include "views/views.h"
 
+char *CURRENT_USER_ID;
+
 int main() {
 
     printf("Initializing GPS Module... ");
@@ -24,10 +26,19 @@ int main() {
     init_wifi();
     printf("Done!\n");
 
-    printf("Initializing Bluetooth Module... ");
-    init_bluetooth();
     /* Setup id & pin for bluetooth module */
     // configure_bluetooth_dongle();
+    printf("Initializing Bluetooth Module... ");
+    init_bluetooth();
+    printf("Done!\n");
+
+    printf("Initializing Memory for User Session... ");
+    CURRENT_USER_ID = malloc(sizeof(char) * 50);
+    int i;
+    char temp[] = "TESTlOXmUqhwrdduuDrLqacuvSI3";
+    for (i = 0; temp[i] != '\0'; i++)
+        CURRENT_USER_ID[i] = temp[i];
+    CURRENT_USER_ID[i] = '\0';
     printf("Done!\n");
 
     /* Clear LCD display (WHITE) & draw watchframe */
@@ -40,6 +51,8 @@ int main() {
     while(1){
         VIEW_STATE = loadView(VIEW_STATE);
     }
+
+    free(CURRENT_USER_ID);
 
     return 0;
 }

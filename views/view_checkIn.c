@@ -11,6 +11,8 @@
 #define CONTINUE_BUTTON_HEIGHT VIEW_WIDTH
 #define CONTINUE_BUTTON_WIDTH VIEW_HEIGHT
 
+extern char *CURRENT_USER_ID;
+
 int
 loadView_checkIn(){
 
@@ -27,10 +29,11 @@ loadView_checkIn(){
     // char str_latitude[50], str_longitude[50];
     // sprintf(str_latitude,"%.5f", latitude);
     // sprintf(str_longitude, "%.5f", longitude);
-    // WIFI_sendCoordinates(str_latitude, str_longitude, "TEST");
+    // WIFI_sendCoordinates(str_latitude, str_longitude, CURRENT_USER_ID);
 
-    /* TRY MAKING POST REQUEST w/ READ GPS MODULE */
-    WIFI_sendCoordinates("49.2765", "-123.2177", "HsrdlOXmUqhwrdduuDrLqacuvSI3");
+    // /* TRY MAKING POST REQUEST w/ READ GPS MODULE */
+    // WIFI_sendCoordinates("49.2765", "-123.2177", "HsrdlOXmUqhwrdduuDrLqacuvSI3");
+    WIFI_sendCoordinates("49.2765", "-123.2177", CURRENT_USER_ID);
 
     return next_state;
 };
