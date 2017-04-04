@@ -15,8 +15,8 @@ loadView_splashscreen(){
     /* Setup touch area for [CONTINUE_BUTTON] */
     button_continue.x = VIEW_POSITION_X;
     button_continue.y = VIEW_POSITION_Y;
-    button_continue.width = VIEW_POSITION_X + VIEW_WIDTH;
-    button_continue.height = VIEW_POSITION_Y + VIEW_HEIGHT;
+    button_continue.width = VIEW_WIDTH;
+    button_continue.height = VIEW_HEIGHT;
 
     /* Listen for inputs on the touchscreen */
     while(1){
