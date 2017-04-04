@@ -12,16 +12,16 @@ drawWatchframe() {
     int i = 0;
     int palette_size = sizeof(WATCHFRAME_PALETTE) / sizeof(int);
     for (i = 0; i < palette_size; i++){
-        ProgramPalette(i, WATCHFRAME_PALETTE[i]);
+        ProgramPalette(i + WATCHFRAME_RESERVED_PALETTE_COUNT, WATCHFRAME_PALETTE[i]);
     }
 
-    ClearScreen(WATCHFRAME_DOMINANT_COLOR);
+    ClearScreen(WATCHFRAME_DOMINANT_COLOR + WATCHFRAME_RESERVED_PALETTE_COUNT);
 
     int j = 0;
     for (j = 0; j < (WATCHFRAME_WIDTH * WATCHFRAME_HEIGHT); j++) {
-        if (WATCHFRAME_PIXELARRAY[j] == (char) WATCHFRAME_DOMINANT_COLOR)
+        if (WATCHFRAME_PIXELARRAY[j] + WATCHFRAME_RESERVED_PALETTE_COUNT == (char) WATCHFRAME_DOMINANT_COLOR + WATCHFRAME_RESERVED_PALETTE_COUNT)
             continue;
         else
-            WriteAPixel(VIEW_POSITION_X + (j % WATCHFRAME_WIDTH), VIEW_POSITION_Y + (j / WATCHFRAME_WIDTH), (int) WATCHFRAME_PIXELARRAY[j]);
+            WriteAPixel(WATCHFRAME_POSITION_X + (j % WATCHFRAME_WIDTH), WATCHFRAME_POSITION_Y + (j / WATCHFRAME_WIDTH), (int) WATCHFRAME_PIXELARRAY[j] + WATCHFRAME_RESERVED_PALETTE_COUNT);
     }
 }

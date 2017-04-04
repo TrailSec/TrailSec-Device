@@ -1,3 +1,5 @@
+#define WATCHFRAME_RESERVED_PALETTE_COUNT 32
+
 /* UI + Image dimensions */
 #define WATCHFRAME_WIDTH 300
 #define WATCHFRAME_HEIGHT 500
