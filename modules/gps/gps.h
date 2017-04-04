@@ -21,4 +21,5 @@ char getchar_gps(void);
 void send_command(char *command);
 int check_GPGGA(void);
 double nmea2dec(char *nmea, char type, char *dir);
-void get_gps_data(double *d_latitude, double *d_longitude);
+
+void GPS_getCoordinates(double *d_latitude, double *d_longitude);

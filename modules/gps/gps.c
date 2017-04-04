@@ -113,7 +113,7 @@ double nmea2dec(char *nmea, char type, char *dir)
 }
 
 // Read gps data from the gps module and print it to the console with the converted latitude and longitude
-void get_gps_data(double *d_latitude, double *d_longitude) {
+void GPS_getCoordinates(double *d_latitude, double *d_longitude) {
     int i;
     char start_log[] = "$PMTK622,1*29\r\n";
 
