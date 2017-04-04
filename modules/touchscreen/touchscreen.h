@@ -30,3 +30,4 @@ int outputTouchScreenChar(void);
 
 /* helper methods */
 bool isTouchInputWithinBox(Point touchInput, Box touchArea);
+Box createBox(int x, int y, int height, int width);

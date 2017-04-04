@@ -73,3 +73,12 @@ bool isTouchInputWithinBox(Point touchInput, Box touchArea) {
     }
 }
 
+Box createBox(int x, int y, int height, int width) {
+    Box thisBox;
+    thisBox.x = x;
+    thisBox.y = y;
+    thisBox.width = width;
+    thisBox.height = height;
+    return thisBox;
+}
+
