@@ -19,7 +19,7 @@ loadView_bluetoothPairing(){
     while(1){
         if ((BLUETOOTH_STATUS & BLUETOOTH_STATUS_RX_MASK) == BLUETOOTH_STATUS_RX_MASK) {
             if (getCommand_bluetooth(BT_str_buffer, BLUETOOTH_STRING_BUFFER_SIZE) != -1) {
-                printf("[BT RECEVIED]:\"%s\"\n", BT_str_buffer);
+                printf("[BT-MODULE]: RECEIVED \"%s\"\n", BT_str_buffer);
 
                 /* 
                  * If we have a string of greater than 25 chars, assume that it's the user-id
@@ -30,7 +30,7 @@ loadView_bluetoothPairing(){
                     for (i = 0; BT_str_buffer[i] != '\0'; i++)
                         CURRENT_USER_ID[i] = BT_str_buffer[i];
                     CURRENT_USER_ID[i] = '\0';
-                    printf("[VALID USER-ID]:\"%s\"\n", CURRENT_USER_ID);
+                    printf("[BT-MODULE]: VALID USER-ID, LOGGING IN...\n", CURRENT_USER_ID);
                     break;
                 }
             }
