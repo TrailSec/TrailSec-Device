@@ -21,19 +21,19 @@ loadView_checkIn(){
     /* Draw UI on screen */
     drawView_checkIn();
 
-    // /* Get current position from GPS Module */
-    // double latitude, longitude;
-    // GPS_getCoordinates(&latitude, &longitude);
+    /* Get current position from GPS Module */
+    double latitude, longitude;
+    GPS_getCoordinates(&latitude, &longitude);
 
-    // /* Make POST request to Firebase REST API via Wifi Module */
-    // char str_latitude[50], str_longitude[50];
-    // sprintf(str_latitude,"%.5f", latitude);
-    // sprintf(str_longitude, "%.5f", longitude);
-    // WIFI_sendCoordinates(str_latitude, str_longitude, CURRENT_USER_ID);
+    /* Make POST request to Firebase REST API via Wifi Module */
+    char str_latitude[50], str_longitude[50];
+    sprintf(str_latitude,"%.5f", latitude);
+    sprintf(str_longitude, "%.5f", longitude);
+    WIFI_sendCoordinates(str_latitude, str_longitude, CURRENT_USER_ID);
 
-    // /* TRY MAKING POST REQUEST w/ READ GPS MODULE */
+    /* TRY MAKING POST REQUEST w/ READ GPS MODULE */
     // WIFI_sendCoordinates("49.2765", "-123.2177", "HsrdlOXmUqhwrdduuDrLqacuvSI3");
-    WIFI_sendCoordinates("49.2765", "-123.2177", CURRENT_USER_ID);
+    // WIFI_sendCoordinates("49.2765", "-123.2177", CURRENT_USER_ID);
 
     return next_state;
 };
