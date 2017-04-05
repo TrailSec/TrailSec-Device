@@ -1,33 +1,38 @@
+#include <string.h>
 #include "views.h"
 #include "../modules/images/images.h"
+#include "../modules/bluetooth/bluetooth.h"
 #include "../modules/touchscreen/touchscreen.h"
+
+extern char *CURRENT_USER_ID;
 
 int 
 loadView_bluetoothPairing(){
 
-    Point touchInput;
-    Box button_continue;
-    int next_state;
+    int next_state = VIEW_MAIN_ID;
+    char BT_str_buffer[BLUETOOTH_STRING_BUFFER_SIZE];
 
     /* Draw UI on screen */
     drawView_bluetoothPairing();
 
-    /* Setup touch area for [CONTINUE_BUTTON] */
-    button_continue.x = VIEW_POSITION_X;
-    button_continue.y = VIEW_POSITION_Y;
-    button_continue.width = VIEW_WIDTH;
-    button_continue.height = VIEW_HEIGHT;
-
-    /* Listen for inputs on the touchscreen */
+    /* Listen for commands from the bluetooth module */
     while(1){
-        if ((TOUCHSCREEN_STATUS & TOUCHSCREEN_STATUS_RX_MASK) == TOUCHSCREEN_STATUS_RX_MASK) {
-            touchInput = TouchPressed();
-            touchInput = TouchRelease();
+        if ((BLUETOOTH_STATUS & BLUETOOTH_STATUS_RX_MASK) == BLUETOOTH_STATUS_RX_MASK) {
+            if (getCommand_bluetooth(BT_str_buffer, BLUETOOTH_STRING_BUFFER_SIZE) != -1) {
+                printf("[BT RECEVIED]:\"%s\"\n", BT_str_buffer);
 
-            /* Check if touch input fall within the [CONTINUE_BUTTON] */
-            if (isTouchInputWithinBox(touchInput, button_continue)) {
-                next_state = VIEW_MAIN_ID;
-                break;
+                /* 
+                 * If we have a string of greater than 25 chars, assume that it's the user-id
+                 *  - Set the received user-id into our global variable CURRENT_USER_ID
+                 */
+                if (strlen(BT_str_buffer) > 25) {
+                    int i;
+                    for (i = 0; BT_str_buffer[i] != '\0'; i++)
+                        CURRENT_USER_ID[i] = BT_str_buffer[i];
+                    CURRENT_USER_ID[i] = '\0';
+                    printf("[VALID USER-ID]:\"%s\"\n", CURRENT_USER_ID);
+                    break;
+                }
             }
         }
     }

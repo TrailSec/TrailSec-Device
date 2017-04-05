@@ -33,12 +33,8 @@ int main() {
     printf("Done!\n");
 
     printf("Initializing Memory for User Session... ");
-    CURRENT_USER_ID = malloc(sizeof(char) * 50);
-    int i;
-    char temp[] = "TESTlOXmUqhwrdduuDrLqacuvSI3";
-    for (i = 0; temp[i] != '\0'; i++)
-        CURRENT_USER_ID[i] = temp[i];
-    CURRENT_USER_ID[i] = '\0';
+    CURRENT_USER_ID = calloc(50, sizeof(char));
+    printf("%s", CURRENT_USER_ID); // Should be printing an empty string...
     printf("Done!\n");
 
     /* Clear LCD display (WHITE) & draw watchframe */
