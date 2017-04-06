@@ -22,10 +22,10 @@ loadView_bluetoothPairing(){
                 printf("[BT-MODULE]: RECEIVED \"%s\"\n", BT_str_buffer);
 
                 /* 
-                 * If we have a string of greater than 25 chars, assume that it's the user-id
+                 * If we have a string of greater than 20 chars, assume that it's the user-id
                  *  - Set the received user-id into our global variable CURRENT_USER_ID
                  */
-                if (strlen(BT_str_buffer) > 25) {
+                if (strlen(BT_str_buffer) > 20) {
                     int i;
                     for (i = 0; BT_str_buffer[i] != '\0'; i++)
                         CURRENT_USER_ID[i] = BT_str_buffer[i];
