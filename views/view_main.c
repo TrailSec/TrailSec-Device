@@ -62,8 +62,10 @@ loadView_main(){
                     if (strcmp("checkin", BT_str_buffer) == 0 || 
                         strcmp("check in", BT_str_buffer) == 0 || 
                         strcmp("check-in", BT_str_buffer) == 0 ||
+                        strcmp("chicken", BT_str_buffer) == 0 ||
                         strcmp("trek", BT_str_buffer) == 0 ||
-                        strcmp("track", BT_str_buffer) == 0) {
+                        strcmp("track", BT_str_buffer) == 0 ||
+                        strcmp("truck", BT_str_buffer) == 0) {
                         printf("[DEVICE]: CHECKING IN...\n");
                         next_state = VIEW_CHECKIN_ID;
                         break;
