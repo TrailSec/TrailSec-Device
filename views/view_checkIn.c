@@ -19,7 +19,7 @@ loadView_checkIn(){
     int next_state = VIEW_MAIN_ID;
 
     /* Draw UI on screen */
-    drawView_checkIn();
+    drawImage_checkIn();
 
     /* Get current position from GPS Module */
     double latitude, longitude;

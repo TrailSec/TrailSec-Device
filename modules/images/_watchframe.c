@@ -7,7 +7,7 @@ const int WATCHFRAME_PALETTE[] = {15329769,12171705,10461600,9013641,3618615,269
 #define WATCHFRAME_DOMINANT_COLOR 9
 
 void
-drawWatchframe() {
+drawImage_watchFrame() {
 
     int i = 0;
     int palette_size = sizeof(WATCHFRAME_PALETTE) / sizeof(int);

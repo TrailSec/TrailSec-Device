@@ -12,7 +12,7 @@ loadView_splashscreen(){
     int next_state = VIEW_BLUETOOTHPAIRING_ID;
 
     /* Draw UI on screen */
-    drawView_splashscreen();
+    drawImage_splashscreen();
 
     /* Wait for 1s before switching to the new view */
     usleep(SPLASHSCREEN_DELAY);

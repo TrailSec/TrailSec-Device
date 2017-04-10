@@ -7,7 +7,7 @@ const int VIEW_SPLASHSCREEN_PALETTE[] = {15069655,14741455,13493681,12771232,102
 #define VIEW_SPLASHSCREEN_DOMINANT_COLOR 5
 
 void
-drawView_splashscreen() {
+drawImage_splashscreen() {
 
     int i = 0;
     int palette_size = sizeof(VIEW_SPLASHSCREEN_PALETTE) / sizeof(int);

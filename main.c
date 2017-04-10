@@ -40,7 +40,7 @@ int main() {
     /* Clear LCD display (WHITE) & draw watchframe */
     ProgramPalette(63, 0xFFFFFF);
     ClearScreen(63);
-    drawWatchframe();
+    drawImage_watchFrame();
 
     /* Start loading UI views within the watchframe */
     int VIEW_STATE = 0;

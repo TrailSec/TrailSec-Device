@@ -13,7 +13,7 @@ loadView_bluetoothPairing(){
     char BT_str_buffer[BLUETOOTH_STRING_BUFFER_SIZE];
 
     /* Draw UI on screen */
-    drawView_bluetoothPairing();
+    drawImage_bluetoothPairing();
 
     /* Listen for commands from the bluetooth module */
     while(1){

@@ -7,7 +7,7 @@ const int VIEW_BLUETOOTHPAIRING_PALETTE[] = {15132648,13756341,11720581,11119017
 #define VIEW_BLUETOOTHPAIRING_DOMINANT_COLOR 5
 
 void
-drawView_bluetoothPairing() {
+drawImage_bluetoothPairing() {
 
     int i = 0;
     int palette_size = sizeof(VIEW_BLUETOOTHPAIRING_PALETTE) / sizeof(int);

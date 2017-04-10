@@ -14,10 +14,10 @@
 #define VIEW_POSITION_Y (WATCHFRAME_POSITION_Y + WATCHFRAME_TO_VIEW_OFFSET_Y)
 
 /* Watch frame */
-void drawWatchframe();
+void drawImage_watchFrame();
 
 /* UI views */
-void drawView_splashscreen();
-void drawView_bluetoothPairing();
-void drawView_main();
-void drawView_checkIn();
+void drawImage_splashscreen();
+void drawImage_bluetoothPairing();
+void drawImage_main();
+void drawImage_checkIn();

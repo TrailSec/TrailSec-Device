@@ -7,7 +7,7 @@ const int VIEW_CHECKIN_PALETTE[] = {15383845,15320918,15132115,11720583,11372403
 #define VIEW_CHECKIN_DOMINANT_COLOR 6
 
 void
-drawView_checkIn() {
+drawImage_checkIn() {
 
     int i = 0;
     int palette_size = sizeof(VIEW_CHECKIN_PALETTE) / sizeof(int);

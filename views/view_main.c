@@ -27,7 +27,7 @@ loadView_main(){
     Box button_logout = createBox(LOGOUT_BUTTON_POSITION_X, LOGOUT_BUTTON_POSITION_Y, LOGOUT_BUTTON_HEIGHT, LOGOUT_BUTTON_WIDTH);
 
     /* Draw UI on screen */
-    drawView_main();
+    drawImage_main();
 
     while(1){
         /* Listen for inputs on the touchscreen */

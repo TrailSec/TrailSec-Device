@@ -7,7 +7,7 @@ const int VIEW_MAIN_PALETTE[] = {16294813,15876918,15190455,13785398,13689276,10
 #define VIEW_MAIN_DOMINANT_COLOR 20
 
 void
-drawView_main() {
+drawImage_main() {
 
     int i = 0;
     int palette_size = sizeof(VIEW_MAIN_PALETTE) / sizeof(int);
