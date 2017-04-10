@@ -15,7 +15,7 @@ char *CURRENT_USER_ID;
 int main() {
 
     printf("Initializing GPS Module... ");
-    Init_Touch();
+    TOUCH_init();
     printf("Done!\n");
 
     printf("Initializing Touch Screen Module... ");

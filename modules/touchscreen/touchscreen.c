@@ -5,23 +5,23 @@
 #include <unistd.h>
 #include "touchscreen.h"
 
-void Init_Touch(void) {
+void TOUCH_init(void) {
     TOUCHSCREEN_CONTROL = 0x15;
     TOUCHSCREEN_BAUD = 0x05;
 }
 
-void WaitingForTouch(void){
+void TOUCH_waitForTouchEvent(void){
     while (TOUCHSCREEN_RXDATA != 0x80);
 }
 
-Point getTouchCoordinates(int PorR){
+Point TOUCH_getTouchCoordinates(int PorR){
     Point p;
 
-    int buffer[4];
+    char buffer[4];
     int size = 4;
     int index;
     for (index = 0; index < size; index++) {
-        buffer[index] = outputTouchScreenChar();
+        buffer[index] = TOUCH_getChar();
     }
     p.x = buffer[1] << 7;
     p.x = p.x | buffer[0];
@@ -42,28 +42,28 @@ Point getTouchCoordinates(int PorR){
     return p;
 }
 
-Point TouchPressed(void) {
-    WaitingForTouch();
-    return getTouchCoordinates(0);
+Point TOUCH_onTouch(void) {
+    TOUCH_waitForTouchEvent();
+    return TOUCH_getTouchCoordinates(0);
 }
 
-Point TouchRelease(void) {
-    WaitingForTouch();
-    return getTouchCoordinates(1);
+Point TOUCH_onRelease(void) {
+    TOUCH_waitForTouchEvent();
+    return TOUCH_getTouchCoordinates(1);
 }
 
-int inputTouchScreenChar(int character) {
+int TOUCH_putChar(char c) {
     while ((TOUCHSCREEN_STATUS & TOUCHSCREEN_STATUS_TX_MASK) != TOUCHSCREEN_STATUS_TX_MASK);
     TOUCHSCREEN_TXDATA = character & 0xFF;
     return TOUCHSCREEN_TXDATA;
 }
 
-int outputTouchScreenChar(void) {
+char TOUCH_getChar(void) {
     while ((TOUCHSCREEN_STATUS & TOUCHSCREEN_STATUS_RX_MASK) != TOUCHSCREEN_STATUS_RX_MASK);
     return  TOUCHSCREEN_RXDATA;
 }
 
-bool isTouchInputWithinBox(Point touchInput, Box touchArea) {
+bool TOUCH_isPointInsideBox(Point touchInput, Box touchArea) {
     if ((touchInput.x >= touchArea.x && touchInput.x <= (touchArea.x + touchArea.width)) &&
         (touchInput.y >= touchArea.y && touchInput.y <= (touchArea.y + touchArea.height))) {
         return true;
@@ -73,7 +73,7 @@ bool isTouchInputWithinBox(Point touchInput, Box touchArea) {
     }
 }
 
-Box createBox(int x, int y, int height, int width) {
+Box TOUCH_createBox(int x, int y, int height, int width) {
     Box thisBox;
     thisBox.x = x;
     thisBox.y = y;
@@ -81,4 +81,3 @@ Box createBox(int x, int y, int height, int width) {
     thisBox.height = height;
     return thisBox;
 }
-

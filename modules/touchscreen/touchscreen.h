@@ -20,14 +20,14 @@ typedef struct {
 #define TOUCHSCREEN_STATUS_TX_MASK 0x02
 #define TOUCHSCREEN_STATUS_RX_MASK 0x01
 
-void Init_Touch(void);
-void WaitingForTouch(void);
-Point getTouchCoordinates(int PorR);
-Point TouchPressed(void);
-Point TouchRelease(void);
-int inputTouchScreenChar(int character);
-int outputTouchScreenChar(void);
+void TOUCH_init(void);
+void TOUCH_waitForTouchEvent(void);
+int  TOUCH_putChar(char c);
+char TOUCH_getChar(void);
+Point TOUCH_getTouchCoordinates(int PorR);
+Point TOUCH_onTouch(void);
+Point TOUCH_onRelease(void);
 
 /* helper methods */
-bool isTouchInputWithinBox(Point touchInput, Box touchArea);
-Box createBox(int x, int y, int height, int width);
+bool TOUCH_isPointInsideBox(Point touchInput, Box touchArea);
+Box TOUCH_createBox(int x, int y, int height, int width);

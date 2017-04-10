@@ -23,8 +23,8 @@ loadView_main(){
     char BT_str_buffer[BLUETOOTH_STRING_BUFFER_SIZE];
 
     /* Setup touch area for [CHECKIN_BUTTON] & [LOGOUT_BUTTON] */
-    Box button_checkin = createBox(CHECKIN_BUTTON_POSITION_X, CHECKIN_BUTTON_POSITION_Y, CHECKIN_BUTTON_HEIGHT, CHECKIN_BUTTON_WIDTH);
-    Box button_logout = createBox(LOGOUT_BUTTON_POSITION_X, LOGOUT_BUTTON_POSITION_Y, LOGOUT_BUTTON_HEIGHT, LOGOUT_BUTTON_WIDTH);
+    Box button_checkin = TOUCH_createBox(CHECKIN_BUTTON_POSITION_X, CHECKIN_BUTTON_POSITION_Y, CHECKIN_BUTTON_HEIGHT, CHECKIN_BUTTON_WIDTH);
+    Box button_logout = TOUCH_createBox(LOGOUT_BUTTON_POSITION_X, LOGOUT_BUTTON_POSITION_Y, LOGOUT_BUTTON_HEIGHT, LOGOUT_BUTTON_WIDTH);
 
     /* Draw UI on screen */
     drawImage_main();
@@ -32,18 +32,18 @@ loadView_main(){
     while(1){
         /* Listen for inputs on the touchscreen */
         if ((TOUCHSCREEN_STATUS & TOUCHSCREEN_STATUS_RX_MASK) == TOUCHSCREEN_STATUS_RX_MASK) {
-            touchInput = TouchPressed();
-            touchInput = TouchRelease();
+            touchInput = TOUCH_onTouch();
+            touchInput = TOUCH_onRelease();
 
             /* Check if touch input fall within the [LOGOUT_BUTTON] */
-            if (isTouchInputWithinBox(touchInput, button_checkin)) {
+            if (TOUCH_isPointInsideBox(touchInput, button_checkin)) {
                 printf("[DEVICE]: CHECKING IN...\n");
                 next_state = VIEW_CHECKIN_ID;
                 break;
             }
 
             /* Check if touch input fall within the [LOGOUT_BUTTON] */
-            if (isTouchInputWithinBox(touchInput, button_logout)) {
+            if (TOUCH_isPointInsideBox(touchInput, button_logout)) {
                 printf("[DEVICE]: LOGGING OUT...\n");
                 next_state = VIEW_SPLASHSCREEN_ID;
                 break;
