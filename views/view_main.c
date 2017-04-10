@@ -52,7 +52,7 @@ loadView_main(){
 
         /* Listen for commands from the bluetooth module */
         if ((BLUETOOTH_STATUS & BLUETOOTH_STATUS_RX_MASK) == BLUETOOTH_STATUS_RX_MASK) {
-            if (getCommand_bluetooth(BT_str_buffer, BLUETOOTH_STRING_BUFFER_SIZE) != -1) {
+            if (BLUETOOTH_getString(BT_str_buffer, BLUETOOTH_STRING_BUFFER_SIZE) != -1) {
                 printf("[BT-MODULE]: RECEIVED \"%s\"\n", BT_str_buffer);
 
                 /* If we have a string of less than 10 chars, assume that it's a valid command */
@@ -73,7 +73,9 @@ loadView_main(){
 
                     /* LOG OUT via Blueooth */
                     if (strcmp("logout", BT_str_buffer) == 0 || 
-                        strcmp("log out", BT_str_buffer) == 0) {
+                        strcmp("log out", BT_str_buffer) == 0 ||
+                        strcmp("Q", BT_str_buffer) == 0 ||
+                        strcmp("q", BT_str_buffer) == 0) {
                         printf("[DEVICE]: LOGGING OUT...\n");
                         next_state = VIEW_SPLASHSCREEN_ID;
                         break;

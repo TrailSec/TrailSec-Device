@@ -6,26 +6,26 @@
 #define BLUETOOTH_STATUS_TX_MASK 0x02
 #define BLUETOOTH_STATUS_RX_MASK 0x01
 
-#define BLUETOOTH_COMMAND_DELAY 2000000 // Set to 2s
+#define BLUETOOTH_COMMAND_DELAY 2 * 1000 * 1000 // Set to 2s
 #define BLUETOOTH_STRING_BUFFER_SIZE 50
 
 // SERIAL-PORT FUNCTIONS
-void init_bluetooth();
-void putchar_bluetooth(char c);
-void putString_bluetooth(char *s);
-void wait_for_read_ready_bluetooth();
-char getchar_bluetooth();
-int getCommand_bluetooth(char *str_buffer, int buflen);
+void BLUETOOTH_init();
+void BLUETOOTH_putChar(char c);
+void BLUETOOTH_putString(char *s);
+void BLUETOOTH_waitForReadReady();
+char BLUETOOTH_getChar();
+int  BLUETOOTH_getString(char *str_buffer, int buflen);
 
 // BLUETOOTH [MODE-SWITCHING] FUNCTIONS
-void enter_command_mode();
-void exit_command_mode();
+void BLUETOOTH_enterCommandMode();
+void BLUETOOTH_exitCommandMode();
 
 // BLUETOOTH [COMMAND] FUNCTIONS
-void set_device_name();
-void set_device_pin();
-void reset_to_factory_defaults();
+void BLUETOOTH_setDeviceName();
+void BLUETOOTH_setDevicePin();
+void BLUETOOTH_factoryReset();
 
 // BLUETOOTH [TEST] FUNCTIONS
-void test_bluetooth_serial_ports();
-void configure_bluetooth_dongle();
+void BLUETOOTH_testSerialPorts();
+void BLUETOOTH_configureModule();

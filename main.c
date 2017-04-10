@@ -27,9 +27,9 @@ int main() {
     printf("Done!\n");
 
     /* Setup id & pin for bluetooth module */
-    // configure_bluetooth_dongle();
+    // BLUETOOTH_configureModule();
     printf("Initializing Bluetooth Module... ");
-    init_bluetooth();
+    BLUETOOTH_init();
     printf("Done!\n");
 
     printf("Initializing Memory for User Session... ");

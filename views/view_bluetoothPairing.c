@@ -18,7 +18,7 @@ loadView_bluetoothPairing(){
     /* Listen for commands from the bluetooth module */
     while(1){
         if ((BLUETOOTH_STATUS & BLUETOOTH_STATUS_RX_MASK) == BLUETOOTH_STATUS_RX_MASK) {
-            if (getCommand_bluetooth(BT_str_buffer, BLUETOOTH_STRING_BUFFER_SIZE) != -1) {
+            if (BLUETOOTH_getString(BT_str_buffer, BLUETOOTH_STRING_BUFFER_SIZE) != -1) {
                 printf("[BT-MODULE]: RECEIVED \"%s\"\n", BT_str_buffer);
 
                 /* 
