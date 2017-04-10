@@ -19,7 +19,7 @@ int main() {
     printf("Done!\n");
 
     printf("Initializing Touch Screen Module... ");
-    init_gps();
+    GPS_init();
     printf("Done!\n");
 
     printf("Initializing Wifi Module... ");

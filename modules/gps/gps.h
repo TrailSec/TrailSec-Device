@@ -14,12 +14,10 @@
 #define MAX_LONGITUDE    180
 #define MAX_LATITUDE     90
 
-void init_gps(void);
-int putchar_gps(char c);
-char getchar_gps(void);
-
-void send_command(char *command);
-int check_GPGGA(void);
-double nmea2dec(char *nmea, char type, char *dir);
-
+void GPS_init(void);
+int  GPS_putChar(char c);
+void GPS_putString(char *s);
+char GPS_getChar(void);
+int  GPS_checkSequence(void);
 void GPS_getCoordinates(double *d_latitude, double *d_longitude);
+double GPS_NMEA2DEC(char *nmea, char type, char *dir);

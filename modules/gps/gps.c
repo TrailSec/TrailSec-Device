@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include "gps.h"
 
-void init_gps(void) {
+void GPS_init(void) {
     //set up 6850 control register to utilize a divide by 16 clock,
     //set RTS low, use 8 bits of data, no parity, 1 stop bit
     //transmitter interrupt disabled
@@ -13,8 +13,8 @@ void init_gps(void) {
     GPS_BAUD = 0x5;
 }
 
-// putchar_gps allows us to write 1 byte of data from the serial port.
-int putchar_gps(char c) {
+// GPS_putChar allows us to write 1 byte of data from the serial port.
+int GPS_putChar(char c) {
     //poll Tx bit in 6850 status register. Wait for it to become '1'
     //write 'c' to the 6850 TxData register to output the character
     while ((GPS_STATUS & GPS_STATUS_TX_MASK) != GPS_STATUS_TX_MASK);
@@ -22,8 +22,8 @@ int putchar_gps(char c) {
     return c;
 }
 
-// getchar_gps allows us to read 1 byte of data from the serial port.
-char getchar_gps(void) {
+// GPS_getChar allows us to read 1 byte of data from the serial port.
+char GPS_getChar(void) {
     //poll Rx bit in 6850 status register. Wait for it to become '1'
     //read received character from 6850 register
 
@@ -38,19 +38,19 @@ char getchar_gps(void) {
 
 // test function to send a command via serial port, and begin printing
 // output characters in the console.
-void send_command(char *command) {
+void GPS_putString(char *s) {
 
     int i;
     int length = strlen(command);
 
     //send the command to the gps
     for (i = 0; i < length; i++) {
-        putchar_gps(command[i]);
+        GPS_putChar(command[i]);
     }
 }
 
 //Check when GPGGA is displayed
-int check_GPGGA(void) {
+int GPS_checkSequence(void) {
 
     const char GPGGA[] = "$GPGGA";
     int length = strlen(GPGGA);
@@ -59,7 +59,7 @@ int check_GPGGA(void) {
     int check;
 
     for (i = 0; i < length; i++) {
-        gps_output = getchar_gps();
+        gps_output = GPS_getChar();
 
         if (gps_output == GPGGA[i]) {
             check = 1;
@@ -75,7 +75,7 @@ int check_GPGGA(void) {
 
 //Converting NMEA to decimal degrees taken from:
 //https://blog.encodez.com/blog/convert-nmea-latitude-longitude-to-decimal
-double nmea2dec(char *nmea, char type, char *dir)
+double GPS_NMEA2DEC(char *nmea, char type, char *dir)
 {
     int idx, dot = 0;
     double dec = 0;
@@ -125,17 +125,17 @@ void GPS_getCoordinates(double *d_latitude, double *d_longitude) {
     char longitude[15] = {'\0'};
     char east_west[3] = {'\0'};
     char north_south[3] = {'\0'};
-    send_command(start_log);
+    GPS_putString(start_log);
 
     while (done == 0) {
 
         if (check != 1) {
-            while (check_GPGGA() != 1);
+            while (GPS_checkSequence() != 1);
             check = 1;
             printf("\n");
         }
         else {
-            output = getchar_gps();
+            output = GPS_getChar();
 
             if (output == '*') {
                 printf("Latitude (ddmm.mmmm): %s\n", latitude);
@@ -143,8 +143,8 @@ void GPS_getCoordinates(double *d_latitude, double *d_longitude) {
                 printf("Longitude (dddmm.mmmm): %s\n", longitude);
                 printf("E/W Indicator: %s\n", east_west);
 
-                *d_latitude = nmea2dec(latitude, '1', north_south);
-                *d_longitude = nmea2dec(longitude, '0', east_west);
+                *d_latitude = GPS_NMEA2DEC(latitude, '1', north_south);
+                *d_longitude = GPS_NMEA2DEC(longitude, '0', east_west);
 
                 printf("THE LATITUDE IN DEGREE: %lf\n", *d_latitude);
                 printf("THE LONGITUDE IN DEGREE: %lf\n", *d_longitude);
