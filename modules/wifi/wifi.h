@@ -6,10 +6,10 @@
 #define WIFI_STATUS_TX_MASK 0x02
 #define WIFI_STATUS_RX_MASK 0x01
 
-void init_wifi(void);
-void wait_for_read_ready();
-void putchar_wifi(char c);
-void putString_wifi(char *s);
-char getchar_wifi(void);
+void WIFI_init(void);
+void WIFI_waitForReadReady();
+void WIFI_putChar(char c);
+void WIFI_putString(char *s);
+char WIFI_putChar(void);
 
 void WIFI_sendCoordinates(char *latitude, char *longitude, char *user_id);

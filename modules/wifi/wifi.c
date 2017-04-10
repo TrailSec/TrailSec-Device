@@ -5,42 +5,42 @@
 #include <unistd.h>
 #include "wifi.h"
 
-void init_wifi(void)
+void WIFI_init(void)
 {
     WIFI_CONTROL = 0x15;
     WIFI_BAUD = 0x01;
-    putString_wifi("\n");
+    WIFI_putString("\n");
     usleep(1000);
-    putString_wifi("\n");
-    putString_wifi("dofile(\"trailsec.lua\")");
-    putString_wifi("\n");
+    WIFI_putString("\n");
+    WIFI_putString("dofile(\"trailsec.lua\")");
+    WIFI_putString("\n");
 }
 
 // Blocks the serial port until it is ready
-void wait_for_read_ready()
+void WIFI_waitForReadReady()
 {
     while((WIFI_STATUS & WIFI_STATUS_RX_MASK) != WIFI_STATUS_RX_MASK);
 }
 
 // Write 1 byte of data into the WIFI serial port
-void putchar_wifi(char c)
+void WIFI_putChar(char c)
 {
     while ((WIFI_STATUS & WIFI_STATUS_TX_MASK) != WIFI_STATUS_TX_MASK);
     WIFI_TXDATA = c & 0xFF;
 }
 
 // Write a string into the wifi TX port
-void putString_wifi(char *s)
+void WIFI_putString(char *s)
 {
     int i;
     for(i=0; s[i]!='\0'; i++){
-        putchar_wifi((char) s[i]);
+        WIFI_putChar((char) s[i]);
     }
 }
 
-char getchar_wifi(void)
+char WIFI_putChar(void)
 {
-    wait_for_read_ready();
+    WIFI_waitForReadReady();
     return WIFI_RXDATA;
 }
 
@@ -95,6 +95,6 @@ void WIFI_sendCoordinates(char *latitude, char *longitude, char *user_id) {
 
     printf(">> %s\n", wifi_command_str);
 
-    putString_wifi(wifi_command_str);
-    putString_wifi("\n");
+    WIFI_putString(wifi_command_str);
+    WIFI_putString("\n");
 }

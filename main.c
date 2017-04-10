@@ -23,7 +23,7 @@ int main() {
     printf("Done!\n");
 
     printf("Initializing Wifi Module... ");
-    init_wifi();
+    WIFI_init();
     printf("Done!\n");
 
     /* Setup id & pin for bluetooth module */
