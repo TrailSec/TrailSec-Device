@@ -36,16 +36,16 @@ char GPS_getChar(void) {
     return (char) 0;
 }
 
-// test function to send a command via serial port, and begin printing
+// test function to send a string via serial port, and begin printing
 // output characters in the console.
 void GPS_putString(char *s) {
 
     int i;
-    int length = strlen(command);
+    int length = strlen(s);
 
-    //send the command to the gps
+    //send the string to the gps
     for (i = 0; i < length; i++) {
-        GPS_putChar(command[i]);
+        GPS_putChar(s[i]);
     }
 }
 

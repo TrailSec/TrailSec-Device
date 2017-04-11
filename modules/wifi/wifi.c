@@ -38,7 +38,7 @@ void WIFI_putString(char *s)
     }
 }
 
-char WIFI_putChar(void)
+char WIFI_getChar(void)
 {
     WIFI_waitForReadReady();
     return WIFI_RXDATA;

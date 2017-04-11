@@ -8,7 +8,6 @@
 int
 loadView_splashscreen(){
 
-    Point touchInput;
     int next_state = VIEW_BLUETOOTHPAIRING_ID;
 
     /* Draw UI on screen */

@@ -10,6 +10,6 @@ void WIFI_init(void);
 void WIFI_waitForReadReady();
 void WIFI_putChar(char c);
 void WIFI_putString(char *s);
-char WIFI_putChar(void);
+char WIFI_getChar(void);
 
 void WIFI_sendCoordinates(char *latitude, char *longitude, char *user_id);

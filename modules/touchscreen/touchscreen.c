@@ -54,7 +54,7 @@ Point TOUCH_onRelease(void) {
 
 int TOUCH_putChar(char c) {
     while ((TOUCHSCREEN_STATUS & TOUCHSCREEN_STATUS_TX_MASK) != TOUCHSCREEN_STATUS_TX_MASK);
-    TOUCHSCREEN_TXDATA = character & 0xFF;
+    TOUCHSCREEN_TXDATA = c & 0xFF;
     return TOUCHSCREEN_TXDATA;
 }
 
