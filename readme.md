@@ -1,4 +1,4 @@
-# trailsec-device-firmware
+# TrailSec-Device
 
 Firmware for TrailSec's wearable device prototype, built on [DE1-SoC Computer + Nios II processor device](http://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=53&No=83). 
 
